@@ -1,7 +1,6 @@
-import { createSchema } from 'graphql-yoga'
 import { db } from './db'
-
-const typeDefinitions = /* GraphQL */ `
+import { Resolvers } from './generated/graphql'
+export const typeDefinitions = /* GraphQL */ `
   type Query {
     getAllDirectors: [Director!]!
     getAllMovies: [Movie!]!
@@ -22,7 +21,7 @@ const typeDefinitions = /* GraphQL */ `
   }
 `
 
-const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
     getAllDirectors: () => {
       return db.director.find()
@@ -30,26 +29,21 @@ const resolvers = {
     getAllMovies: () => {
       return db.movie.find()
     },
-    getDirector: (_: any, { id }: { id: number }) => {
+    getDirector: (_: any, { id }) => {
       return db.director.findById(id)
     },
-    getMovie: (_: any, { id }: { id: number }) => {
+    getMovie: (_: any, { id }) => {
       return db.movie.findById(id)
     },
   },
   Director: {
-    movies: (parent: {id: number}) => {
+    movies: (parent) => {
       return db.movie.findByDirectorId(parent.id)
     },
   },
   Movie: {
-    director: (parent: {directorId: number}) => {
+    director: (parent) => {
       return db.director.findById(parent.directorId)
     },
   },
 }
-
-export const schema = createSchema({
-  resolvers: [resolvers],
-  typeDefs: [typeDefinitions]
-})

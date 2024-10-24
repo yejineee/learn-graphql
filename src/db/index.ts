@@ -8,9 +8,9 @@ export const db = {
       console.log('db.director.find')
       return Object.values(DIRECTOR)
     },
-    findById(id: number) {
+    findById(id: string) {
       console.log('db.director.findById', id)
-      return DIRECTOR[id as keyof typeof DIRECTOR]
+      return DIRECTOR[+id as keyof typeof DIRECTOR]
     },
   },
   movie: {
@@ -18,13 +18,13 @@ export const db = {
       console.log('db.movie.find')
       return Object.values(MOVIE)
     },
-    findById(id: number) {
+    findById(id: string) {
       console.log('db.movie.findById', id)
-      return MOVIE[id as keyof typeof MOVIE]
+      return MOVIE[+id as keyof typeof MOVIE]
     },
-    findByDirectorId(directorId: number) {
+    findByDirectorId(directorId: string) {
       console.log('db.movie.findByDirectorId', directorId)
-      return Object.values(MOVIE).filter((movie) => movie.directorId === directorId)
+      return Object.values(MOVIE).filter((movie) => movie.directorId === +directorId)
     },
   },
 }
