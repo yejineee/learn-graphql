@@ -8,6 +8,7 @@ const config: CodegenConfig = {
     "src/generated/graphql.ts": {
       plugins: ["typescript", "typescript-resolvers"],
       config: {
+        mapperTypeSuffix: 'Model',
         mappers: {
           Movie: '../model#Movie',
           Director: '../model#Director',
