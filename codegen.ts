@@ -3,13 +3,18 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "http://localhost:4000/graphql",
+  schema: "src/schema.ts",
   generates: {
     "src/generated/graphql.ts": {
-      plugins: ["typescript", "typescript-resolvers"]
+      plugins: ["typescript", "typescript-resolvers"],
+      config: {
+        mappers: {
+          Movie: '../model#Movie',
+          Director: '../model#Director',
+        }
+      },
     }
   },
-  watch: true,
 };
 
 export default config;
