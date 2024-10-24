@@ -24,7 +24,7 @@ export const db = {
     },
     findByDirectorId(directorId: string) {
       console.log('db.movie.findByDirectorId', directorId)
-      return Object.values(MOVIE).filter((movie) => movie.directorId === +directorId)
+      return Object.values(MOVIE).filter((movie) => movie.directorId === directorId)
     },
   },
 }
